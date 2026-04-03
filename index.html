@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ad Growth Solutions</title>
+  <meta name="description" content="Creative ad content for local businesses." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #02070f;
+      --bg-soft: #071227;
+      --card: linear-gradient(180deg, rgba(35,43,97,.82), rgba(26,31,78,.92));
+      --text: #f4f6fb;
+      --muted: rgba(255,255,255,.82);
+      --line: rgba(255,255,255,.72);
+      --accent: #d3ff34;
+      --max: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: radial-gradient(circle at top, #071834 0%, #03070f 45%, #000 100%);
+      color: var(--text);
+    }
+
+    img, video { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 48px), var(--max));
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      font-weight: 500;
+      line-height: 1.05;
+      margin: 0 0 20px;
+      letter-spacing: -.03em;
+    }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.12));
+    }
+
+    .site-header .inner {
+      width: min(calc(100% - 40px), 1280px);
+      margin: 0 auto;
+      min-height: 78px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: .95rem;
+      letter-spacing: .02em;
+    }
+
+    .brand {
+      justify-self: center;
+      font-size: clamp(2rem, 3vw, 3.5rem);
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: -.04em;
+      white-space: nowrap;
+    }
+
+    .nav-link {
+      opacity: .95;
+      transition: opacity .25s ease;
+    }
+
+    .nav-link:hover { opacity: 1; }
+
+    .hero {
+      min-height: 100svh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      isolation: isolate;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,.18);
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+    }
+
+    .hero-media img,
+    .hero-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(.52);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.22), rgba(0,0,0,.42) 35%, rgba(0,0,0,.58));
+      z-index: -1;
+    }
+
+    .hero-content {
+      width: min(calc(100% - 40px), 980px);
+      margin: 110px auto 0;
+      text-align: center;
+      padding: 100px 0 80px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(3.1rem, 7vw, 5.5rem);
+      font-weight: 400;
+      line-height: 1.06;
+      letter-spacing: -.045em;
+    }
+
+    .hero p {
+      margin: 18px auto 0;
+      max-width: 700px;
+      font-size: clamp(1rem, 1.6vw, 1.5rem);
+      color: rgba(255,255,255,.92);
+    }
+
+    .cta-wrap {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .cta {
+      min-width: 350px;
+      max-width: 100%;
+      border: 1.4px solid rgba(255,255,255,.88);
+      border-radius: 999px;
+      padding: 22px 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      font-size: 1.35rem;
+      font-weight: 500;
+      background: rgba(0,0,0,.12);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+      transition: transform .25s ease, background .25s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.04);
+    }
+
+    .cta .circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1.4px solid var(--accent);
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.45rem;
+      line-height: 1;
+    }
+
+    section {
+      padding: 92px 0;
+    }
+
+    .about-grid,
+    .audience-grid {
+      display: grid;
+      grid-template-columns: 1.03fr .97fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .media-stack {
+      position: relative;
+      min-height: 420px;
+    }
+
+    .media-card {
+      position: absolute;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,.28);
+      background: #09111f;
+    }
+
+    .media-card img,
+    .media-card video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .88;
+    }
+
+    .card-one {
+      top: 0;
+      left: 0;
+      width: 58%;
+      height: 190px;
+    }
+
+    .card-two {
+      left: 32%;
+      top: 180px;
+      width: 56%;
+      height: 190px;
+    }
+
+    .eyebrow-title {
+      font-size: clamp(2rem, 3.4vw, 3.5rem);
+      margin-bottom: 26px;
+      font-weight: 400;
+      letter-spacing: -.03em;
+    }
+
+    .text-block p {
+      font-size: clamp(1rem, 1.35vw, 1.4rem);
+      line-height: 1.7;
+      color: var(--muted);
+      margin: 0 0 22px;
+      max-width: 620px;
+    }
+
+    .text-block strong { color: #fff; font-weight: 600; }
+
+    .who-we-help .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 26px;
+      align-items: center;
+    }
+
+    .oval {
+      aspect-ratio: 1.55 / 1;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #0b1224;
+      box-shadow: 0 18px 60px rgba(0,0,0,.24);
+    }
+
+    .oval img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .92;
+    }
+
+    .oval.offset { transform: translateY(22px); }
+    .oval.small { width: 82%; margin-left: auto; }
+
+    .solutions {
+      text-align: center;
+      padding-top: 80px;
+    }
+
+    .solutions .lead {
+      max-width: 760px;
+      margin: 14px auto 44px;
+      line-height: 1.7;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+      text-align: left;
+    }
+
+    .solution-card {
+      background: var(--card);
+      border: 1.5px solid rgba(255,255,255,.82);
+      border-radius: 14px;
+      padding: 28px 22px 18px;
+      min-height: 310px;
+      display: grid;
+      grid-template-columns: 1fr 88px;
+      gap: 22px;
+      box-shadow: 0 24px 60px rgba(0,0,0,.16);
+    }
+
+    .solution-card h3 {
+      margin: 0 0 14px;
+      font-size: 1.9rem;
+      line-height: 1.1;
+      font-weight: 500;
+      letter-spacing: -.03em;
+      font-style: italic;
+    }
+
+    .solution-card .label {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .solution-card ul {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.7;
+      color: rgba(255,255,255,.95);
+      font-size: 1rem;
+    }
+
+    .solution-card p {
+      margin: 18px 0 0;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,.95);
+    }
+
+    .solution-card .price {
+      margin-top: 16px;
+      font-size: 1.35rem;
+      text-align: right;
+      font-weight: 500;
+      align-self: end;
+      white-space: nowrap;
+    }
+
+    .icon-box {
+      display: grid;
+      place-items: center;
+      align-self: center;
+      opacity: .96;
+    }
+
+    .icon-box svg {
+      width: 72px;
+      height: 72px;
+      stroke: white;
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    .site-footer {
+      margin-top: 48px;
+      background: linear-gradient(180deg, #001306, #001108);
+      padding: 40px 0 28px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .footer-brand h2 {
+      margin: 0 0 24px;
+      font-size: clamp(2rem, 3vw, 3.1rem);
+      letter-spacing: -.04em;
+      font-weight: 500;
+    }
+
+    .footer-logo {
+      width: 180px;
+      opacity: .95;
+      margin-top: 14px;
+    }
+
+    .footer-nav {
+      display: grid;
+      justify-content: end;
+      gap: 16px;
+      padding-top: 34px;
+      font-size: 1.05rem;
+    }
+
+    .footer-bottom {
+      margin-top: 110px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: .95rem;
+      color: rgba(255,255,255,.92);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1080px) {
+      .site-header .inner {
+        grid-template-columns: 1fr;
+        padding: 14px 0;
+      }
+
+      .brand { order: -1; }
+      .nav-left, .nav-right { justify-content: center; }
+
+      .about-grid,
+      .audience-grid,
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .media-stack {
+        min-height: 380px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container { width: min(calc(100% - 28px), var(--max)); }
+      .hero-content { margin-top: 120px; }
+      .cta { min-width: 0; width: 100%; font-size: 1.1rem; }
+      .solutions-grid { grid-template-columns: 1fr; }
+      .solution-card { grid-template-columns: 1fr; }
+      .solution-card .price { text-align: left; }
+      .who-we-help .gallery { grid-template-columns: 1fr; }
+      .oval.small { width: 100%; }
+      .oval.offset { transform: none; }
+      .media-stack { min-height: 320px; }
+      .card-one { width: 74%; height: 150px; }
+      .card-two { width: 70%; height: 150px; left: 22%; top: 150px; }
+      .footer-nav { justify-content: start; padding-top: 8px; }
+      .footer-bottom { margin-top: 50px; }
+      .nav-left, .nav-right { gap: 18px; font-size: .88rem; flex-wrap: wrap; }
+      section { padding: 72px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <nav class="nav-left">
+        <a class="nav-link" href="#about">ABOUT</a>
+        <a class="nav-link" href="#solutions">SOLUTIONS</a>
+        <a class="nav-link" href="#contact">CONTACT</a>
+      </nav>
+      <a class="brand" href="#top">Ad Growth Solutions</a>
+      <div class="nav-right"></div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-media">
+        <img src="assets/hero.jpg" alt="Large billboard style ad background" />
+      </div>
+
+      <div class="hero-content">
+        <h1>Your Dedicated Partner<br>In Business Transformation</h1>
+        <p>Guiding You Towards Success with Proven Strategies</p>
+        <div class="cta-wrap">
+          <a class="cta" href="#contact">
+            <span>Contact Us</span>
+            <span class="circle">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container about-grid">
+        <div class="media-stack">
+          <div class="media-card card-one">
+            <img src="assets/about-1.jpg" alt="Creative ad visual" />
+          </div>
+          <div class="media-card card-two">
+            <img src="assets/about-2.jpg" alt="Video thumbnail style visual" />
+          </div>
+        </div>
+
+        <div class="text-block">
+          <h2 class="eyebrow-title">Who We Are</h2>
+          <p>At Ad Growth Solutions, our priority is not profit; our priority is to help our community.</p>
+          <p>We create magnetizing and compelling visuals built on real marketing principles, not guesswork.</p>
+          <p>We don’t just create ads, we analyze your brand, understand your audience, and craft ads that drive real results.</p>
+          <p>Most businesses don’t struggle because they lack tools. They struggle because they lack <strong>strategy.</strong></p>
+          <p>Our mission is simple:<br>Help brands <strong>stand out</strong>, get <strong>more visibility</strong>, and grab <strong>more customers</strong> with ads that actually perform.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="who-we-help">
+      <div class="container audience-grid">
+        <div class="text-block">
+          <h2 class="section-title">Who We Help</h2>
+          <p>We work with businesses that want to <strong>grow</strong> through high-performing digital ads and creative content.</p>
+          <p>Whether you're a barber shop, local gym, detailer, boba shop, our solutions are built for brands that value clarity, speed, and measurable results.</p>
+        </div>
+
+        <div class="gallery">
+          <div class="oval"><img src="assets/help-1.jpg" alt="Barber shop visual" /></div>
+          <div class="oval offset"><img src="assets/help-2.jpg" alt="Gym visual" /></div>
+          <div class="oval small"><img src="assets/help-3.jpg" alt="Car detailing visual" /></div>
+          <div class="oval offset"><img src="assets/help-4.jpg" alt="Drink product visual" /></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="solutions" class="solutions">
+      <div class="container">
+        <h2 class="section-title">Explore Our Solutions</h2>
+        <p class="lead">Pricing is flexible based on scope, volume, and turnaround time. Custom packages and quantities are available upon request. Please contact AdgrowthSolutions1@gmail.com</p>
+
+        <div class="solutions-grid">
+          <article class="solution-card">
+            <div>
+              <h3>Starter Launch</h3>
+              <div class="label">Includes:</div>
+              <ul>
+                <li>2 AI-generated image ads or 1 motion ad (text + animation)</li>
+                <li>Ad copy (headline + CTA)</li>
+                <li>Platform-ready formats (Instagram / Facebook)</li>
+                <li>1 revision</li>
+              </ul>
+              <p>Professional ads without agency overhead</p>
+            </div>
+            <div>
+              <div class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 64 64">
+                  <path d="M10 50h44"></path>
+                  <path d="M16 46V32"></path>
+                  <path d="M28 46V22"></path>
+                  <path d="M40 46V28"></path>
+                  <path d="M10 38l10 6 12-14 10 4 12-16"></path>
+                  <path d="M46 14h8v8"></path>
+                </svg>
+              </div>
+              <div class="price">$100-$200 CAD</div>
+            </div>
+          </article>
+
+          <article class="solution-card">
+            <div>
+              <h3>Growth Creative</h3>
+              <div class="label">Includes:</div>
+              <ul>
+                <li>4–5 AI-generated ads (image + motion mix)</li>
+                <li>Hook-optimized copy variations</li>
+                <li>Multiple aspect ratios (Feed, Story, Reel)</li>
+                <li>2 revisions</li>
+              </ul>
+              <p>More creatives to test and improve performance</p>
+            </div>
+            <div>
+              <div class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 64 64">
+                  <path d="M16 48h32"></path>
+                  <path d="M20 48V36"></path>
+                  <path d="M30 48V28"></path>
+                  <path d="M40 48V20"></path>
+                  <path d="M14 34l14-8 10-8 12-4"></path>
+                </svg>
+              </div>
+              <div class="price">$300-$450 CAD</div>
+            </div>
+          </article>
+
+          <article class="solution-card">
+            <div>
+              <h3>Scale Accelerator</h3>
+              <div class="label">Includes:</div>
+              <ul>
+                <li>8–10 AI-generated ads (image + motion)</li>
+                <li>Creative testing strategy (hooks & messaging angles)</li>
+                <li>Performance-driven revisions</li>
+                <li>Priority turnaround</li>
+              </ul>
+              <p>Identify winning creatives faster, reduce wasted spend</p>
+            </div>
+            <div>
+              <div class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 64 64">
+                  <circle cx="32" cy="32" r="20"></circle>
+                  <path d="M23 33l6 6 13-14"></path>
+                </svg>
+              </div>
+              <div class="price">$650-$900 CAD</div>
+            </div>
+          </article>
+
+          <article class="solution-card">
+            <div>
+              <h3>Done-For-You AI Ad System (In Development)</h3>
+              <ul>
+                <li>Monthly AI ad creative production</li>
+                <li>Ongoing motion + image ads</li>
+                <li>Creative direction & messaging strategy</li>
+                <li>Performance insights & recommendations</li>
+              </ul>
+              <p>A repeatable ad system that evolves with your business</p>
+            </div>
+            <div>
+              <div class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 64 64">
+                  <circle cx="32" cy="32" r="21"></circle>
+                  <circle cx="32" cy="32" r="13"></circle>
+                  <circle cx="32" cy="32" r="5"></circle>
+                </svg>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h2>Ad Growth Solutions</h2>
+          <img class="footer-logo" src="assets/logo.png" alt="Ad Growth Solutions logo" />
+        </div>
+
+        <nav class="footer-nav">
+          <a href="terms.html">TERMS & CONDITIONS</a>
+          <a href="#solutions">SOLUTIONS</a>
+          <a href="mailto:AdgrowthSolutions1@gmail.com">CONTACT</a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="accessibility.html">Accessibility Statement</a>
+        </div>
+        <div>© 2025 Ad Growth Solutions</div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
